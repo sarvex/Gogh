@@ -22,13 +22,14 @@ for filename in os.listdir(folder_path):
     if filename.endswith(".yml"):
         with open(os.path.join(folder_path, filename), "r") as f:
             data = yaml.safe_load(f)
-            theme = {f"{key}": data[key] for key in data if key.startswith("color")}
-            theme.update({
+            theme = {
+                f"{key}": data[key] for key in data if key.startswith("color")
+            } | {
                 "name": data["name"],
                 "foreground": data["foreground"],
                 "background": data["background"],
-                "cursorColor": data["cursor"]
-            })
+                "cursorColor": data["cursor"],
+            }
             themes.append(theme)
 
 themes = sorted(themes, key=lambda x: x["name"])

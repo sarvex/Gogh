@@ -12,7 +12,7 @@ with open(input_file, "r") as f:
     data = json.load(f)
 
 theme_names = [re.sub(r'[^a-zA-Z0-9\s]+', '-', unidecode(theme["name"]).lower().replace(' ', '-')).rstrip('-') for theme in data["themes"]]
-themes = sorted(list(set([f"{name}.sh" for name in theme_names])))
+themes = sorted(list({f"{name}.sh" for name in theme_names}))
 
 with open(output_file, "r") as f:
     lines = f.readlines()
